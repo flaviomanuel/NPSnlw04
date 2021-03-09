@@ -1,6 +1,5 @@
 import { Request, Response} from 'express';
 import { getCustomRepository } from 'typeorm';
-import { createArrayLiteral } from 'typescript';
 import { SurveyRepository } from '../repositories/SurveysRepository';
 
 class SurveysController {
