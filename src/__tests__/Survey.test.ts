@@ -1,12 +1,20 @@
 import request from 'supertest';
 import createConnection from "../database";
 import { app } from '../app';
+import { getConnection } from 'typeorm';
 
 describe("Surveys", async() =>{
 	beforeAll(async () =>{
 		const connection = await createConnection();
 		await connection.runMigrations();
 	})
+
+	afterAll(async () => {
+		const connection = getConnection();
+		await connection.dropDatabase()
+		await connection.close();
+	})
+
 	it("Should be able to create a new survey", async () => {
 		const response = await request(app) // possibilita realizar uma requisição com 
 		.post("/surveys")
